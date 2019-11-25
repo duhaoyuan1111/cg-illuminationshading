@@ -84,16 +84,17 @@ class GlApp {
         
         // draw all models --> note you need to properly select shader here
         for (let i = 0; i < this.scene.models.length; i ++) {
-            this.gl.useProgram(this.shader['emissive'].program);
+            this.gl.useProgram(this.shader['gouraud_color'].program);
 
             glMatrix.mat4.identity(this.model_matrix);
             glMatrix.mat4.translate(this.model_matrix, this.model_matrix, this.scene.models[i].center);
             glMatrix.mat4.scale(this.model_matrix, this.model_matrix, this.scene.models[i].size);
 
-            this.gl.uniform3fv(this.shader['emissive'].uniform.material, this.scene.models[i].material.color);
-            this.gl.uniformMatrix4fv(this.shader['emissive'].uniform.projection, false, this.projection_matrix);
-            this.gl.uniformMatrix4fv(this.shader['emissive'].uniform.view, false, this.view_matrix);
-            this.gl.uniformMatrix4fv(this.shader['emissive'].uniform.model, false, this.model_matrix);
+            this.gl.uniform3fv(this.shader['gouraud_color'].uniform.material_col, this.scene.models[i].material.color);
+            this.gl.uniformMatrix4fv(this.shader['gouraud_color'].uniform.projection, false, this.projection_matrix);
+            this.gl.uniformMatrix4fv(this.shader['gouraud_color'].uniform.view, false, this.view_matrix);
+            this.gl.uniformMatrix4fv(this.shader['gouraud_color'].uniform.model, false, this.model_matrix);
+			this.gl.uniform3fv(this.shader['gouraud_color'].uniform.light_ambient, this.scene.light.ambient);
 
             this.gl.bindVertexArray(this.vertex_array[this.scene.models[i].type]);
             this.gl.drawElements(this.gl.TRIANGLES, this.vertex_array[this.scene.models[i].type].face_index_count, this.gl.UNSIGNED_SHORT, 0);
