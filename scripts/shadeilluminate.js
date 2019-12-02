@@ -64,7 +64,11 @@ class GlApp {
 
     InitializeTexture(image_url) {
         // create a texture, and upload a temporary 1px white RGBA array [255,255,255,255]
-        let texture;
+	var white =  [255,255,255,255];
+        let texture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D, texture);
+	gl.texImage2D(gl.TEXTURE_2D, 0,gl.RGBA, 1, 1, 0,gl.RGBA, gl.UNSIGNED_BYTE, white);
+	gl.bindTexture(gl.TEXTURE_2D, null);
 
         // load the actual image
         let image = new Image();
@@ -77,7 +81,7 @@ class GlApp {
 
     UpdateTexture(texture, image_element) {
 		gl.bindTexture(gl.TEXTURE_2D, texture);
-		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,gl.UNSIGNED_BYTE, image);
+		gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA,gl.UNSIGNED_BYTE, image_element);
 		gl.generateMipmap(gl.TEXTURE_2D);
 		gl.bindTexture(gl.TEXTURE_2D, null);
     }
