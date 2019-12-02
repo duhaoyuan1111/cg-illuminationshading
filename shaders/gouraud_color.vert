@@ -22,7 +22,8 @@ void main() {
     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(vertex_position, 1.0);
 	
 	ambient = light_ambient;
-	//diffuse = light_color*(vertex_normal*(light_position-vertex_position));
-	//reflect_light = 2*(vertex_normal*(light_position-vertex_position))*vertex_normal-(light_position-vertex_position);
-	//specular =light_color*((reflect_light*(camera_position-vertex_position))pow(material_shininess);
+	diffuse = light_color*(vertex_normal*(light_position-vertex_position));
+	
+	//specular = vec3(pow(2.0,2.0),0.0,0.0);
+	//specular = light_color*pow((2.0*vertex_normal*(light_position-vertex_position)*vertex_normal-(light_position-vertex_position))*(camera_position-vertex_position),material_shininess);
 }
