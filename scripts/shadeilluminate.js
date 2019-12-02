@@ -67,7 +67,8 @@ class GlApp {
 	var white =  [255,255,255,255];
         let texture = gl.createTexture();
 	gl.bindTexture(gl.TEXTURE_2D, texture);
-	gl.texImage2D(gl.TEXTURE_2D, 0,gl.RGBA, 1, 1, 0,gl.RGBA, gl.UNSIGNED_BYTE, white);
+	gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+	gl.texImage2D(gl.TEXTURE_2D, 0,gl.RGBA, 1, 1, 0,gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(white));
 	gl.bindTexture(gl.TEXTURE_2D, null);
 
         // load the actual image
