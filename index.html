@@ -35,12 +35,17 @@
                         },
                         {
                             type: 'cube',
-                            shader: 'color',
+                            shader: 'texture',
                             material: {
                                 color: glMatrix.vec3.fromValues(0.1, 0.4, 0.9),  // red, green, blue
                                 specular: glMatrix.vec3.fromValues(1.0, 1.0, 1.0),  // red, green, blue
                                 shininess: 32
                             },
+							texture:{
+								url:'C:\Users\MCYX\Downloads\cg-illuminationshading-master\images\Checkered.jpg',
+								scale:[1.0,1.0]
+							
+							},
                             center: glMatrix.vec3.fromValues(0.0, 1.0, -6.0), // x, y, z
                             size: glMatrix.vec3.fromValues(2.0, 2.0, 2.0)  // width, height, depth
                         }
