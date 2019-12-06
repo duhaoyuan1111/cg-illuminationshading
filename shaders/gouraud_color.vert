@@ -23,17 +23,19 @@ void main() {
     gl_Position = projection_matrix * view_matrix * model_matrix * vec4(vertex_position, 1.0);
 	vec4 temp = model_matrix*vec4(vertex_position,1.0);
 	vec3 vertex_positionNew = vec3(temp);
-	
 	vec3 vertice_normalNew = normalize(inverse(transpose(mat3(model_matrix)))*vertex_normal);
 	
 	ambient = light_ambient;
-
-	diffuse = light_color*clamp(dot(vertice_normalNew,normalize(light_position-vertex_positionNew)),0.0,1.0);
-
-	vec3 reflect_light = reflect(-normalize(light_position-vertex_positionNew),vertice_normalNew);
-	vec3 view = normalize(camera_position-vertex_positionNew);
-	specular = light_color*pow(clamp(dot(reflect_light,view),0.0,1.0),material_shininess);
-	for(let i=0; i<num_lights; i++) {
+	diffuse = vec3(0,0,0);
+	specular = vec3(0,0,0);
+	
+	for(int i=0; i<num_lights; i++) {
+		diffuse = diffuse+ light_color[i]*clamp(dot(vertice_normalNew,normalize(light_position[i]-vertex_positionNew)),0.0,1.0);
 		
+		vec3 reflect_light = reflect(-normalize(light_position[i]-vertex_positionNew),vertice_normalNew);
+		vec3 view = normalize(camera_position-vertex_positionNew);
+		specular = specular+ light_color[i]*pow(clamp(dot(reflect_light,view),0.0,1.0),material_shininess);
 	}
+	specular = max(specular,1.0);
+	diffuse = max(diffuse,1.0);
 }
