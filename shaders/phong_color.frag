@@ -28,8 +28,8 @@ void main() {
 		vec3 view = normalize(camera_position-frag_pos);
 		specular = specular+ light_color[i]*pow(clamp(dot(reflect_light,view),0.0,1.0),material_shininess);
 	}
-	specular = max(specular,1.0);
-	diffuse = max(diffuse,1.0);
+	specular = min(specular,1.0);
+	diffuse = min(diffuse,1.0);
 	
     FragColor = vec4(ambient, 1.0)*vec4(material_color, 1.0) + vec4(diffuse, 1.0)*vec4(material_color, 1.0) + vec4(specular, 1.0)*vec4(material_specular, 1.0);
 }

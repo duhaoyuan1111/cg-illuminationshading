@@ -36,6 +36,6 @@ void main() {
 		vec3 view = normalize(camera_position-vertex_positionNew);
 		specular = specular+ light_color[i]*pow(clamp(dot(reflect_light,view),0.0,1.0),material_shininess);
 	}
-	specular = max(specular,1.0);
-	diffuse = max(diffuse,1.0);
+	specular = min(specular,1.0);
+	diffuse = min(diffuse,1.0);
 }
