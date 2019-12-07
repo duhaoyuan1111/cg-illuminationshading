@@ -14,7 +14,7 @@
                 "shininess": 30
             },
             "texture": {
-                "url": "images/yekong.jpg",
+                "url": "images/night.jpg",
                 "scale": [1,1]
             },
             "center": [0.0, 0.0, 0.0],
