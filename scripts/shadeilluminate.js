@@ -116,7 +116,6 @@ class GlApp {
 					this.gl.uniform3fv(this.shader[this.algorithm+"_"+this.scene.models[i].shader].uniform.light_pos[j], this.scene.light.point_lights[j].position);
 				}
 			}else if (this.scene.models[i].shader === 'texture'){
-				console.log('drawmodel - other', i);
 				this.gl.useProgram(this.shader[this.algorithm+"_"+this.scene.models[i].shader].program);
 				glMatrix.mat4.identity(this.model_matrix);
 				glMatrix.mat4.translate(this.model_matrix, this.model_matrix, this.scene.models[i].center);
